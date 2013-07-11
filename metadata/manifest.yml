@@ -1,0 +1,51 @@
+Name: jetty
+Cartridge-Short-Name: JETTY
+Display-Name: JETTY
+Description: "An OpenShift cartridge for using a Jetty WebSocket server."
+Version: '0.1'
+License: "MIT"
+Vendor: worldline
+Cartridge-Version: 0.1
+Cartridge-Vendor: worldline
+Categories:
+  - service
+  - web_framework
+Provides:
+  - jetty
+Scaling:
+  Min: 1
+  Max: -1
+Cart-Data:
+  - Key: OPENSHIFT_JETTY_LOG_DIR
+    Type: environment
+    Description: "Directory to store application log files."
+  - Key: OPENSHIFT_TMP_DIR
+    Type: environment
+    Description: "Directory to store application temporary files."
+  - Key: OPENSHIFT_REPO_DIR
+    Type: environment
+  - Key: OPENSHIFT_JETTY_PORT
+    Type: environment
+    Description: "Internal port to which the web-framework binds to."
+  - Key: OPENSHIFT_JETTY_IP
+    Type: environment
+    Description: "Internal IP to which the web-framework binds to."
+Group-Overrides:
+  - components:
+    - jetty
+Subscribes:
+  set-db-connection-info:
+    Type: "ENV:NET_TCP:db:connection-info"
+    Required: false
+  set-nosql-db-connection-info:
+    Type: "ENV:NET_TCP:nosqldb:connection-info"
+    Required : false
+Endpoints:
+  - Private-IP-Name:   IP
+    Private-Port-Name: PORT
+    Private-Port:      8080
+    Public-Port-Name:  PROXY_PORT
+    Mappings:
+      - Frontend:      ""
+        Backend:       ""
+        Options:       { websocket: true }

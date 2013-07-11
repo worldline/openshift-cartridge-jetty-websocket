@@ -1,0 +1,52 @@
+#!/bin/bash -e
+
+function start {
+    cd $OPENSHIFT_REPO_DIR
+    nohup mvn -Popenshift jetty:run 2>&1 | tee -a $OPENSHIFT_HCA_DIR/logs/jetty.log &
+}
+
+function stop {
+    killall java || true
+}
+
+function restart {
+    stop
+    start
+}
+
+function build {
+    # Workaround for failure in npm install when a package in package.json
+    # points to a git commit.
+    # This issue occurs because we are running in the context of a
+    # git post receive-hook
+    unset GIT_DIR
+    unset GIT_WORK_TREE
+
+    cd $OPENSHIFT_REPO_DIR
+    mvn install -Popenshift -DskipTests=true
+}
+
+function tidy {
+    cd $OPENSHIFT_REPO_DIR
+    mvn clean -Popenshift 
+    rm -fr "$OPENSHIFT_HOMEDIR"/.m2/*
+}
+
+function catchall {
+}
+
+case "$1" in
+  start)       start ;;
+  stop)        stop ;;
+  restart)     restart ;;
+  status)      status ;;
+  reload)      catchall ;;
+  tidy)        tidy ;;
+  pre-build)   catchall ;;
+  build)       build ;;
+  deploy)      catchall ;;
+  post-deploy) catchall ;;
+  *)           exit 0
+esac
+
+exit 0
