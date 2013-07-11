@@ -33,6 +33,7 @@ function tidy {
 }
 
 function catchall {
+    echo ""
 }
 
 case "$1" in
