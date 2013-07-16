@@ -2,7 +2,7 @@
 
 function start {
     cd $OPENSHIFT_REPO_DIR
-    nohup mvn -Popenshift jetty:run 2>&1 | tee -a $OPENSHIFT_JETTY_DIR/logs/jetty.log &
+    nohup mvn -Popenshift jetty:run >> $OPENSHIFT_JETTY_DIR/logs/jetty.log 2>&1 &
 }
 
 function stop {
