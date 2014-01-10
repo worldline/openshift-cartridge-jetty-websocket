@@ -1,6 +1,6 @@
 # OpenShift Cartridge for Jetty WebSocket 
 
-Create an app with a downloaded cartridge: http://cartreflect-claytondev.rhcloud.com/reflect?github=AtosWorldline/openshift-cartridge-jetty-websocket
+Create an app with a downloaded cartridge: http://cartreflect-claytondev.rhcloud.com/reflect?github=Worldline/openshift-cartridge-jetty-websocket
 
 The cartridge will run :
 * `mvn install -Popenshift -DskipTests=true` to build your application
@@ -34,7 +34,7 @@ In your pom.xml, create an [openshift profile](https://github.com/AtosWorldline/
       </profile>
     </profiles>
 
-Then create a [connector in the `jetty-maven-plugin` configuration](https://github.com/AtosWorldline/openshift-cartridge-jetty-websocket/blob/master/template/pom.xml#L41), to configure the `port` and the `host`
+Then create a [connector in the `jetty-maven-plugin` configuration](https://github.com/Worldline/openshift-cartridge-jetty-websocket/blob/master/template/pom.xml#L41), to configure the `port` and the `host`
 
     <plugin>
       <!-- This plugin is needed for the servlet example -->
@@ -59,7 +59,7 @@ Then create a [connector in the `jetty-maven-plugin` configuration](https://gith
 
 Use 8000 port or 8443 for wss ! Web traffic works on the 80 and 443 port on OpenShift but WebSocket only works on the 8000 and 8443 port.
 
-So you will have to adapt your client like this ([JavaScript example](https://github.com/AtosWorldline/openshift-cartridge-jetty-websocket/blob/master/template/src/main/webapp/index.jsp#L44)): 
+So you will have to adapt your client like this ([JavaScript example](https://github.com/Worldline/openshift-cartridge-jetty-websocket/blob/master/template/src/main/webapp/index.jsp#L44)): 
 
     var openshiftWebSocketPort = 8000; // Or use 8443 for wss
     var wsUri = "ws://" + window.location.hostname + ":" + openshiftWebSocketPort + "/ws";
