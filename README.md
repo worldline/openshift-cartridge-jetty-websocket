@@ -1,6 +1,6 @@
 # OpenShift Cartridge for Jetty WebSocket 
 
-Create an app with a downloaded cartridge: http://cartreflect-claytondev.rhcloud.com/reflect?github=Worldline/openshift-cartridge-jetty-websocket
+Create an app with a downloaded cartridge: http://cartreflect-claytondev.rhcloud.com/github/Worldline/openshift-cartridge-jetty-websocket
 
 The cartridge will run :
 * `mvn install -Popenshift -DskipTests=true` to build your application
